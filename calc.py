@@ -99,4 +99,9 @@ for blend in uniqueBlends:
 ### }}}
 
 print(single)
+print(blends)
+print(products)
+print(history)
+print(stock)
+print(orders)
 # vim: set foldmethod=marker foldlevel=0:
