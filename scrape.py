@@ -60,7 +60,7 @@ def main():
             'version=v4')
     service = discovery.build('sheets', 'v4', http=http, discoveryServiceUrl=discoveryUrl)
     spreadsheetId = '12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU'
-    sheetNames = {'single.csv':'Single Origin', 'blends.csv':'Blends', 'orders.csv':'Orders', 'stock.csv':'Stock' }
+    sheetNames = {'single.csv':'Single Origin', 'blends.csv':'Blends', 'orders.csv':'Orders', 'stock.csv':'Stock', 'totals.csv':'Totals'}
 
     for fileName in sheetNames:
         rangeName = sheetNames[fileName]
@@ -71,7 +71,7 @@ def main():
         if not values:
             print('No data found.')
         else:
-            del(values[0]) # Spreadsheet header
+            del(values[0]) # Sheet header
             f = open(fileName,"w")
             for row in values:
                 f.write("%s\n" % ','.join(row))
