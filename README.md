@@ -7,9 +7,14 @@ roastcalc.py takes those CSV files and looks at them to determine how much of ea
 
 ## USAGE:
 * Make sure `history.csv` exists.
+* [Edit](https://docs.google.com/spreadsheets/d/12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU/edit?usp=sharing) _Orders_ sheet to suit the day's needs.
 * `./scrape.py`
 * `./roastcalc.py`
 
 ## TODO:
-- [ ] Download the most recently available history.csv from scrape.py
-- [ ] Create a way to fulfill orders
+- [ ] Download the most recently available `history.csv` using `scrape.py`
+- [ ] Track and fulfill orders as they occur
+- [ ] Email the roast needs to relevant members
+- [ ] Subscription tracking
+- [ ] Increased automation?
+- [ ] Better user-friendliness (through automation)

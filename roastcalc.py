@@ -1,20 +1,5 @@
 #!/usr/bin/env python3
 
-### License ### {{{
-#   Copyright (c) Greater Goods Roasting Company
-#
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-#   GNU General Public License for more detail.
-#   <http://www.gnu.org/licenses/>
-# }}}
-
 ### Import data from CSV files ### {{{
 import csv
 
@@ -116,7 +101,7 @@ if __name__ == "__main__":
         needed = roastNeeds[(component, profile)]
         roast  = needed+needed*abs(loss/100)+safetyBuffer
         print("Roast %.2f lbs of %s on the %s profile to yield %.2f lbs"
-              "(avg. %.2f%% loss plus %.2f lbs safety buffer)."
+              "(avg. %.2f%% loss plus %.2f lbs as a safety buffer)."
               % (roast, component, profile, needed, loss, safetyBuffer))
 ### }}}
 

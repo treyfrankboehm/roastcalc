@@ -11,10 +11,10 @@ import apiclient
 import oauth2client
 
 # If modifying these scopes, delete your previously saved credentials
-# at ~/.credentials/sheets.googleapis.com-python-quickstart.json
+# at ~/.config/credentials/sheets.googleapis.com-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 CLIENT_SECRET_FILE = 'client_secret.json'
-APPLICATION_NAME = 'roastcalc.py via Google Sheets API Python'
+APPLICATION_NAME = 'roastcalc.py via Google Sheets API for Python'
 
 def get_credentials():
     credential_path = os.path.join("/home/trey/.config/credentials/"
@@ -47,7 +47,6 @@ def main():
             for row in values:
                 f.write("%s\n" % ','.join(row))
             f.close
-            print("Wrote file %s." % fileName)
 
 if __name__ == "__main__":
     main()
