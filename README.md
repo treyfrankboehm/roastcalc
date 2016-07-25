@@ -18,3 +18,4 @@ roastcalc.py takes those CSV files and looks at them to determine how much of ea
 - [ ] Subscription tracking
 - [ ] Increased automation?
 - [ ] Better user-friendliness (through automation)
+- [ ] Change _Master_ spreadsheet sharing, remove `client_secret.json` for security (though I doubt this would ever be an issue)
