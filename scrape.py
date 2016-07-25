@@ -12,9 +12,9 @@ import oauth2client
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.config/credentials/sheets.googleapis.com-python-quickstart.json
-SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
-CLIENT_SECRET_FILE = 'client_secret.json'
-APPLICATION_NAME = 'roastcalc.py via Google Sheets API for Python'
+SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly"
+CLIENT_SECRET_FILE = "/home/trey/.config/credentials/client_secret.json"
+APPLICATION_NAME = "roastcalc.py via Google Sheets API for Python"
 
 def get_credentials():
     credential_path = os.path.join("/home/trey/.config/credentials/"
@@ -29,23 +29,23 @@ def main():
     discoveryUrl = ("https://sheets.googleapis.com/$discovery/rest?"
             "version=v4")
     service = apiclient.discovery.build("sheets", "v4", http=http, discoveryServiceUrl=discoveryUrl)
-    spreadsheetId = '12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU'
-    sheetNames = {'products.csv':'Products', 'totals.csv':'Totals'}
+    spreadsheetId = "12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU"
+    sheetNames = {"products.csv":"Products", "totals.csv":"Totals"}
 
     for fileName in sheetNames:
         rangeName = sheetNames[fileName]
         result = service.spreadsheets().values().get(
                 spreadsheetId=spreadsheetId, range=rangeName).execute()
-        values = result.get('values', [])
+        values = result.get("values", [])
 
         if not values:
-            sys.stderr.write('error: No data found.')
+            sys.stderr.write("error: No data found.")
         else:
             # Write the values to a CSV file
             del(values[0]) # Sheet header
             f = open(fileName,"w")
             for row in values:
-                f.write("%s\n" % ','.join(row))
+                f.write("%s\n" % ",".join(row))
             f.close
 
 if __name__ == "__main__":
