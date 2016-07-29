@@ -14,7 +14,9 @@ import csv
 import os
 
 # Download the files 
+print("Running scrape.py")
 os.system("./scrape.py")
+print("scrape.py completed\n")
 
 # Column indices for history.csv:
 # ID-Tag, Profile, Date, Component, Start Weight, End Weight, % Loss
@@ -134,10 +136,12 @@ if __name__ == "__main__":
               % (roast, component, profile, needed, loss, safetyBuffer))
         print(r)
         outFile.write("%s\n" % r)
-    outFile.close()
-    print('')
     for p in subscriptions:
-        print("Send a %s lb bag of %s to \n\t%s" % (p[2], p[1], p[0].replace('\\', '\n\t')))
+        s = ("\nSend a %s lb bag of %s to \n\t%s" %
+                (p[2], p[1], p[0].replace('\\', '\n\t')))
+        print(s)
+        outFile.write("%s\n" % s)
+    outFile.close()
     if emailBool:
         for e in emails:
             emailCommand = ("mailx %s < outFile.txt" % e)
