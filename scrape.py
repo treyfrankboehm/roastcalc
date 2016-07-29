@@ -30,7 +30,7 @@ def main():
             "version=v4")
     service = apiclient.discovery.build("sheets", "v4", http=http, discoveryServiceUrl=discoveryUrl)
     spreadsheetId = "12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU"
-    sheetNames = {"products.csv":"Products", "totals.csv":"Totals"}
+    sheetNames = {"products.csv":"Products", "totals.csv":"Totals", "subscriptions.csv":"Subscriptions"}
 
     for fileName in sheetNames:
         rangeName = sheetNames[fileName]
@@ -47,6 +47,7 @@ def main():
             for row in values:
                 f.write("%s\n" % ",".join(row))
             f.close
+            print("Scraped data into %s." % fileName)
 
 if __name__ == "__main__":
     main()

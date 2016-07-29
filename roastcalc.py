@@ -1,25 +1,42 @@
 #!/usr/bin/env python3
 
+### Magic numbers ### {{{
+# Add $safetyBuffer$ pounds to each roast input weight
+safetyBuffer = 0.5
+# Whether to email the roast report or not (set to False when testing)
+emailBool = False
+# The emails to send the report to
+emails = ["trey.frank.boehm@gmail.com"]
+### }}}
+
 ### Import data from CSV files ### {{{
 import csv
+import os
+
+# Download the files 
+os.system("./scrape.py")
 
 # Column indices for history.csv:
 # ID-Tag, Profile, Date, Component, Start Weight, End Weight, % Loss
 # 0,      1,       2,    3,         4,            5,          6
-history = list(csv.reader(open('history.csv')))
+history = list(csv.reader(open("history.csv")))
 
 # Column indices for products.csv:
 # Product, Component, Component #, Roast profile, % of blend
 # 1,       2,         3,           4,             5
-products = list(csv.reader(open('products.csv')))
+products = list(csv.reader(open("products.csv")))
 
 # Column indices for totals.csv:
 # Product, 3oz, 12oz, 2lb, 5lb, total lbs, roast/don't roast [1/0]
 # 0,       1,   2,    3,   4,   5,         6
-raw_totals = list(csv.reader(open('totals.csv')))
+raw_totals = list(csv.reader(open("totals.csv")))
 # Remove products that don't need to be roasted (no orders)
 totals = [p for p in raw_totals if p[-1] == '1']
 
+# Column indices for subscriptions.csv:
+raw_subs = list(csv.reader(open("subscriptions.csv")))
+# Remove products that aren't shipping today
+subscriptions = [p for p in raw_subs if p[-2] == '0']
 ### }}}
 
 ### Percent loss calculation ### {{{
@@ -74,8 +91,6 @@ for product in unique:
 #   {("Component 1", "Profile 1"):pounds,
 #    ("Component 2", "Profile 2"):pounds, etc}
 roastNeeds = {}
-# Add $safetyBuffer$ pounds to each roast input weight
-safetyBuffer = 0.5
 
 # Populate the dict
 for i in range(len(totals)):
@@ -92,17 +107,41 @@ for i in range(len(totals)):
                 roastNeeds[(component, profile)] += pounds*percent
             except KeyError:
                 roastNeeds[(component, profile)] = pounds*percent
+for i in range(len(subscriptions)):
+    pounds = float(subscriptions[i][2])
+    product = subscriptions[i][1]
+    for i in range(len(productInfo[product])):
+        component =       productInfo[product][i][0]
+        profile   =       productInfo[product][i][1]
+        percent   = float(productInfo[product][i][2])
+        # If the key:value pair has not been initialized yet, it
+        # returns an error. Try to add weight, otherwise initialize.
+        try:
+            roastNeeds[(component, profile)] += pounds*percent
+        except KeyError:
+            roastNeeds[(component, profile)] = pounds*percent
 # }}}
 
 ### Main ### {{{
 if __name__ == "__main__":
+    outFile = open("outFile.txt", "w")
     for (component, profile) in roastNeeds:
         loss   = percentLoss(component, profile)
         needed = roastNeeds[(component, profile)]
         roast  = needed+needed*abs(loss/100)+safetyBuffer
-        print("Roast %.2f lbs of %s on the %s profile to yield %.2f lbs"
-              "(avg. %.2f%% loss plus %.2f lbs as a safety buffer)."
+        r = ("Roast %.2f lbs of %s on the %s profile to yield %.2f lbs "
+              "(avg. %.2f%% loss plus %.2f lbs buffer)."
               % (roast, component, profile, needed, loss, safetyBuffer))
+        print(r)
+        outFile.write("%s\n" % r)
+    outFile.close()
+    print('')
+    for p in subscriptions:
+        print("Send a %s lb bag of %s to \n\t%s" % (p[2], p[1], p[0].replace('\\', '\n\t')))
+    if emailBool:
+        for e in emails:
+            emailCommand = ("mailx %s < outFile.txt" % e)
+            os.system(emailCommand)
 ### }}}
 
 # vim: set foldmethod=marker foldlevel=0:
