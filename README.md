@@ -13,6 +13,6 @@ Before running, [edit](https://docs.google.com/spreadsheets/d/12McXQu2Ap7cRrX8U4
 * `./roastcalc.py`
 
 ## TODO:
-- [ ] Download the most recently available `history.csv` using `scrape.py`
-- [ ] Track and fulfill orders as they occur
-- [ ] Better user-friendliness (through increased automation)
+- [ ] Download the most recently available `history.csv` using `scrape.py` (need to look into Cropster functions/capabilities)
+- [ ] Track and fulfill orders as they occur (this may be a different tool altogether)
+- [ ] Improved UI

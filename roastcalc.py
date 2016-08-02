@@ -3,6 +3,8 @@
 ### Magic numbers ### {{{
 # Add this percent to roast input weight
 safetyBuffer = 0.005
+# Roast this many extra pounds for production cupping
+cupQuantity = 0.2
 # Whether to email the roast report or not (set to False when testing)
 emailBool = False
 # The emails to send the report to
@@ -128,13 +130,18 @@ for i in range(len(subscriptions)):
 ### Main ### {{{
 if __name__ == "__main__":
     outFile = open("outFile.txt", "w")
+    header = ("Safety buffer percentage: %.2f%%\n"
+            "Amount for cupping: %.2f lbs\n" %
+            (100*safetyBuffer, cupQuantity))
+    print(header)
+    outFile.write("%s\n" % header)
     for (component, profile) in roastNeeds:
         loss   = percentLoss(component, profile)
-        needed = roastNeeds[(component, profile)]
+        needed = roastNeeds[(component, profile)]+cupQuantity
         roast  = needed+needed*abs(loss/100+safetyBuffer)
         r = ("Roast %.2f lbs of %s on the %s profile to yield %.2f lbs "
-              "(avg. %.2f%% loss with a %.2f%% buffer)."
-              % (roast, component, profile, needed, loss, 100*safetyBuffer))
+              "(avg. %.2f%% loss)" %
+              (roast, component, profile, needed, loss))
         print(r)
         outFile.write("%s\n" % r)
     for p in subscriptions:
