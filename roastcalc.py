@@ -1,22 +1,20 @@
 #!/usr/bin/env python3
 
-### Disclaimer ### {{{
 # This file is part of roastcalc
 # 
 # roastcalc is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 # GNU General Public License for more detail.
 # <http://www.gnu.org/licenses/>
-
+#
 # You should have received a copy of the GNU General Public License
 # along with roastcalc.  If not, see <http://www.gnu.org/licenses/>.
-### }}}
 
 ### Magic numbers ### {{{
 # Add this percent to roast input weight
@@ -33,11 +31,10 @@ emails = []
 ### Import data from CSV files ### {{{
 import csv
 import os
+import scrape
 
 # Download the files 
-print("Running scrape.py")
-os.system("./scrape.py")
-print("scrape.py completed\n")
+scrape.main()
 
 # Column indices for history.csv:
 # ID-Tag, Profile, Date, Component, Start Weight, End Weight, % Loss
@@ -130,6 +127,7 @@ for i in range(len(totals)):
                 roastNeeds[(component, profile)] += pounds*percent
             except KeyError:
                 roastNeeds[(component, profile)] = pounds*percent
+
 for i in range(len(subscriptions)):
     pounds = float(subscriptions[i][2])
     product = subscriptions[i][1]
