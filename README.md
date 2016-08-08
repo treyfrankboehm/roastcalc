@@ -8,13 +8,13 @@
 Before running, [edit](https://docs.google.com/spreadsheets/d/12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU/edit?usp=sharing) _Orders_ sheet to suit the day's needs, _Current Stock_ to reflect what's on the shelves and in bulk bags, and _Subscriptions_, if applicable. Regularly check to make sure that _Products_ accurately reflects the currently-offered products and that _Desired Stock_ represents the ideal amount of coffees on the shelf. _Totals_ will be automatically generated, but make sure that the list of products in column A is consistent across all sheets.
 
 ## DEPENDENCIES:
-# Required
+### Required
 * python3
 * [httplib2](https://github.com/httplib2/httplib2)
 * [apiclient](https://github.com/google/google-api-python-client)
 * [oauth2client](https://github.com/google/oauth2client)
 
-# Recommended
+### Recommended
 * bsd-mailx (set `emailBool` to `False` if you don't want to use this feature)
 * [pip](https://pip.pypa.io/en/stable/installing/) (very useful for installing Python modules)
 
@@ -25,5 +25,5 @@ Before running, [edit](https://docs.google.com/spreadsheets/d/12McXQu2Ap7cRrX8U4
 * `./roastcalc.py`
 
 ## TODO:
-- [ ] Download the most recently available `history.csv` using `scrape.py` (need to look into Cropster functions/capabilities)
-- [ ] Track and fulfill orders as they occur (this may be a different tool altogether)
+* Download the most recently available `history.csv` using `scrape.py` (need to look into Cropster functions/capabilities)
+* Track and fulfill orders as they occur (this may be a different tool altogether)
