@@ -20,9 +20,7 @@
 safetyBuffer = 0.005        # Add this percent to roast input weight
 cupQuantity = 0.2           # Add to roast for production cupping
 emailBool = False           # Email report or no?
-emails = ["trey.frank.boehm@gmail.com",
-          "tcobb775@gmail.com",
-          "trey@ggroasting.com"]
+emails = ["trey@ggroasting.com"]
 
 ### Import data from CSV files ###
 import scrape   # Download the spreadsheet as CSV files
@@ -139,7 +137,10 @@ if __name__ == "__main__":
     # Print everything to the console and write to a file (for email)
     outFile = open("report.txt", "w")
     header = ("Safety buffer percentage for roasting: %.2f%%\n"
-            "Amount to add for cupping: %.2f lbs\n" %
+            "Amount to add for cupping: %.2f lbs\n"
+            "These results assume that you don't want to get below the" 
+            " ``desired\nstock'' numbers to fulfill orders. Make "
+            "adjustments to what you do/\ndon't roast accordingly." %
             (100*safetyBuffer, cupQuantity))
     print("\n%s" % header)
     outFile.write("%s\n" % header)
