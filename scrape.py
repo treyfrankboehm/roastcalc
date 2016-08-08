@@ -25,8 +25,14 @@ import oauth2client
 # page for the Sheets API. The values of interest are spreadsheetId and
 # sheetNames.
 spreadsheetId = "12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU"
-sheetNames    = {"products.csv":"Products", "totals.csv":"Totals",
-        "subscriptions.csv":"Subscriptions"}
+sheetNames = {
+        "products.csv":"Products",
+#        "current.csv":"Current Stock",
+#        "desired.csv":"Desired Stock",
+#        "orders.csv":"Orders",
+        "subscriptions.csv":"Subscriptions",
+        "totals.csv":"Totals"
+}
 credentialPath= "sheets.googleapis.com-roastcalc.json"
 clientSecret  = "client_secret.json"
 scopes        = "https://www.googleapis.com/auth/spreadsheets.readonly"
