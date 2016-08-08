@@ -13,14 +13,15 @@ Before running, [edit](https://docs.google.com/spreadsheets/d/12McXQu2Ap7cRrX8U4
 * [httplib2](https://github.com/httplib2/httplib2)
 * [apiclient](https://github.com/google/google-api-python-client)
 * [oauth2client](https://github.com/google/oauth2client)
+
 # Recommended
 * bsd-mailx (set `emailBool` to `False` if you don't want to use this feature)
 * [pip](https://pip.pypa.io/en/stable/installing/) (very useful for installing Python modules)
 
 ## USAGE:
-* Make sure `history.csv` exists.
+* Download the latest Cropster report as `history.csv` in the `roastcalc` directory.
 * [Edit](https://docs.google.com/spreadsheets/d/12McXQu2Ap7cRrX8U4Vegjk3zA3pPUd5HTLOp3swbswU/edit?usp=sharing) the spreadsheet as needed.
-* Download a `client_secret.json` file from 
+* Download a `client_secret.json` file from the [credentials](https://console.developers.google.com/apis/credentials?project=direct-branch-138023) page to the `roastcalc` dir (request access if necessary).
 * `./roastcalc.py`
 
 ## TODO:
